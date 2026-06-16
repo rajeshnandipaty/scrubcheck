@@ -1,12 +1,12 @@
 # ScrubCheck
 
-> Paste a claim's procedure codes and see what Medicare's NCCI program will bundle or cap before you submit, with the reason for each flag.
+> Paste a claim's procedure codes and see what Medicare's NCCI program will bundle or cap before submission. Reason for each flag are provided.
 
-ScrubCheck takes the procedure codes from a claim and runs the same two checks a payer runs before paying: PTP (are any two of these procedures bundled?) and MUE (does any single code exceed its daily unit cap?). It returns a remittance-style readout, with a verdict per line and a plain-English explanation per conflict, so denials get caught at the desk instead of three weeks later on an EOB.
+ScrubCheck takes the procedure codes from a claim and runs the same two checks a payer runs before paying: PTP (any two procedures bundled?) and MUE (any single code exceeding its daily unit cap?). It returns a remittance-style readout with a verdict per line plus a plain-English explanation per conflict, so denials get caught at the desk as opposed to three weeks later on an EOB.
 
 ## What it does
 
-You type one procedure per line, attach modifiers with a hyphen, and put units after a space:
+Type one procedure per line, attach modifiers with a hyphen, and put units after a space:
 
 ```
 99214-25
@@ -18,20 +18,20 @@ You type one procedure per line, attach modifiers with a hyphen, and put units a
 
 ScrubCheck answers instantly and offline:
 
-- **Hard bundles.** A comprehensive metabolic panel (`80053`) and a basic metabolic panel (`80048`) cannot both be billed, because the comprehensive already includes the basic. Modifier indicator `0` means no modifier overrides it.
-- **Modifier-eligible bundles.** A minor procedure (`20610`) bundles the office visit billed with it, unless the visit was separately identifiable and carries modifier `25`. Modifier indicator `1` means a modifier can apply, so ScrubCheck checks whether you already used an appropriate one and tells you if it is missing.
-- **Unit-cap overages.** Billing `36415` (venipuncture) three times against an MUE of 2. It distinguishes an absolute policy cap (MAI 2, not appealable) from a clinical cap (MAI 3, payable on appeal with documentation).
+- **Hard bundles.** Billing both a comprehensive metabolic panel (`80053`) and a basic metabolic panel (`80048`) should not be possible, since the comprehensive already includes the basic. Modifier indicator `0` means no modifier overrides it.
+- **Modifier-eligible bundles.** A minor procedure (`20610`) bundles the office visit billed with it, unless the visit was separately identifiable and carries modifier `25`. Modifier indicator `1` means a modifier can apply, so ScrubCheck checks whether an appropriate one is already used and tells if it is missing.
+- **Unit-cap overages.** Billing `36415` (venipuncture) three times against an MUE of two. It distinguishes an absolute policy cap (MAI 2, not appealable) from a clinical cap (MAI 3, payable on appeal with documentation).
 - **Codes it does not recognize.** These are flagged explicitly, so "no findings" is never mistaken for "fully validated."
 
 Each finding cites the rule behind it: the PTP pair and modifier indicator, or the MUE value and MAI.
 
 ## How it is built
 
-The whole thing is built around one split.
+The entire thing is built around one split.
 
-The core is deterministic and runs with no API key and no network. Every check is a hash lookup against the CMS edit tables. This is the part that has to be right, so it owes nothing to a model.
+The core is deterministic and runs with neither an API key nor a network. Every check is a hash lookup against the CMS edit tables. This is the part that has to be right, so it owes nothing to a model.
 
-The explanation layer is optional, and it is the only thing that touches an API. With an Anthropic key configured, an "Explain with Claude" button rewrites each finding's facts as one or two sentences a biller can act on, grounded only in the facts the engine already computed. The prompt forbids introducing any coding or clinical claim that was not passed in. Without a key, the app falls back to built-in templated explanations and stays fully usable.
+The explanation layer is optional, and it is the only thing that touches an API. With an Anthropic key configured, an "Explain with Claude" button rewrites each finding's facts as one or two sentences a biller can act on, grounded only in the facts the engine already computed. The prompt restricts introducing any coding or clinical claim that was not passed in. Without a key, the app falls back to built-in templated explanations and stays fully usable.
 
 That separation is the point. Correctness lives in the code, phrasing lives in the model, and the model never decides whether two codes bundle.
 
@@ -70,17 +70,17 @@ The importer reads CSV or tab-delimited text (if you only have the `.xlsx`, save
 
 ## What I learned
 
-- **Correctness and fluency are different jobs.** The temptation with an LLM is to hand it the whole task. But "do these two codes bundle?" has a right answer that lives in a table, and a model that is 98% right on that is 100% wrong on the 2% of claims that matter. Splitting the deterministic check from the generated explanation made the tool both trustworthy and readable, and it left the prompt with one job: say this clearly. That is a job models are good at.
+- **Correctness and fluency are different jobs.** The temptation with an LLM is to hand it the whole task. But "do these two codes bundle?" has a right answer that lives in a table, and a model that is 98% right on that is still 100% wrong on the 2% of claims that matter. Splitting the deterministic check from the generated explanation made the tool both trustworthy and readable. It left the prompt with one job: say this clearly. That is what models tend to be good at.
 - **The modifier indicator is the whole thing.** A `0` and a `1` look identical until you know that one is an absolute bundle and the other means "document the distinct service and append the modifier." Encoding that distinction, and checking whether the user already applied a bypass modifier, is what turns a code list into actionable feedback.
 - **Public reference data has quirks.** CMS encodes "still active" as `*`, ships dates in more than one format, and reorders columns between quarters. The importer maps by header name and fails open on unknown date formats rather than silently dropping edits.
 
 ## Why this is not hosted publicly
 
-The core would be safe to host, since it is just lookups. But the honest reason to keep it local is the same as the [glossary-flashcards](https://github.com/rajeshnandipaty/glossary-flashcards) project: the explanation layer makes paid API calls against my account, and a public demo invites abuse. So it runs locally, the source is here, and a demo video is on [my portfolio](https://rajeshnandipaty.com).
+The core would be safe to host, since it is just lookups. But the honest reason to keep it local is the same as with the [glossary-flashcards](https://github.com/rajeshnandipaty/glossary-flashcards) project: the explanation layer invites paid API calls that can lead to abuse. So it runs locally, the source is here, and a demo video is on [my portfolio](https://rajeshnandipaty.com/projects/scrubcheck/).
 
 ## Not billing advice
 
-ScrubCheck is an educational tool over public and sample data. It does not guarantee payment and is not a substitute for certified coding software or a certified coder. Verify against the current CMS NCCI edit files before submitting real claims.
+ScrubCheck is an educational tool over public and sample data. It does not guarantee payment, and is **not a substitute for certified coding software or a certified coder**. Verify against the current CMS NCCI edit files before submitting real claims.
 
 ## Project layout
 
