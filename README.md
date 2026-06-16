@@ -2,6 +2,12 @@
 
 > Paste a claim's procedure codes and see what Medicare's NCCI program will bundle or cap before submission. Reason for each flag are provided.
 
+<img width="1920" height="1200" alt="sc-deny" src="https://github.com/user-attachments/assets/9324d215-b325-4f93-92f8-2c40939341a0" />
+
+<img width="1920" height="1200" alt="sc-clean" src="https://github.com/user-attachments/assets/b5f7c9f4-7905-427a-a564-59a381ced7d7" />
+
+<img width="1920" height="1200" alt="sc-over" src="https://github.com/user-attachments/assets/41108aed-5673-4e97-9df8-be2ab5b5931a" />
+
 ScrubCheck takes the procedure codes from a claim and runs the same two checks a payer runs before paying: PTP (any two procedures bundled?) and MUE (any single code exceeding its daily unit cap?). It returns a remittance-style readout with a verdict per line plus a plain-English explanation per conflict, so denials get caught at the desk as opposed to three weeks later on an EOB.
 
 ## What it does
