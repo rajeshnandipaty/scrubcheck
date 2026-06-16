@@ -1,0 +1,18 @@
+column_1	column_2	prior_to_1996	effective_date	deletion_date	modifier	rationale
+93000	93005	*	19960101	*	0	Standards of medical / surgical practice
+93000	93010	*	19960101	*	0	Standards of medical / surgical practice
+71046	71045		20030101	*	0	Mutually exclusive procedures
+80053	80048	*	19960101	*	0	More extensive procedure (comprehensive panel includes basic)
+80053	82565	*	19960101	*	0	Laboratory panel includes the component analyte
+80053	84295	*	19960101	*	0	Laboratory panel includes the component analyte
+80048	82565	*	19960101	*	0	Laboratory panel includes the component analyte
+80048	84132	*	19960101	*	0	Laboratory panel includes the component analyte
+85025	85027	*	19960101	*	0	More extensive procedure
+20610	96372		20040101	*	1	Misuse of column two code with column one code
+20610	99213		20040101	*	1	Evaluation and management service included in minor procedure
+20610	99214		20040101	*	1	Evaluation and management service included in minor procedure
+12002	12001		20020101	*	1	Mutually exclusive procedures
+96372	96360		20090101	*	1	Misuse of column two code with column one code
+11042	97597		20140101	*	1	Standards of medical / surgical practice
+17000	17003		20020101	20151231	9	Code pair deleted (no longer an active edit)
+36415	99000	*	19960101	20081231	9	Code pair deleted (no longer an active edit)

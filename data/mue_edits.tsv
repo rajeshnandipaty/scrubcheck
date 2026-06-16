@@ -1,0 +1,23 @@
+hcpcs_cpt_code	mue_value	mai	rationale
+99213	1	2	Anatomic consideration / coding policy (one E/M per day per provider)
+99214	1	2	Anatomic consideration / coding policy (one E/M per day per provider)
+99215	1	2	Anatomic consideration / coding policy (one E/M per day per provider)
+99203	1	2	Anatomic consideration / coding policy (one E/M per day per provider)
+99204	1	2	Anatomic consideration / coding policy (one E/M per day per provider)
+99205	1	2	Anatomic consideration / coding policy (one E/M per day per provider)
+36415	2	3	Clinical: nature of service / typical units per day
+80053	1	3	Clinical: nature of service / typical units per day
+80048	1	3	Clinical: nature of service / typical units per day
+85025	1	3	Clinical: nature of service / typical units per day
+85027	1	3	Clinical: nature of service / typical units per day
+93000	1	3	Clinical: nature of service / typical units per day
+71045	1	3	Clinical: nature of service / typical units per day
+71046	1	3	Clinical: nature of service / typical units per day
+90686	1	3	Clinical: nature of service / typical units per day
+G0008	1	3	Clinical: nature of service / typical units per day
+20610	4	3	Clinical: anatomic limit on major joints per day
+96372	6	3	Clinical: nature of service / typical units per day
+12001	1	3	Clinical: nature of service / typical units per day
+12002	1	3	Clinical: nature of service / typical units per day
+17000	1	3	Clinical: nature of service / typical units per day
+11042	1	3	Clinical: nature of service / typical units per day

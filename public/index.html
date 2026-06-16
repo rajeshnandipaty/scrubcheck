@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScrubCheck, a pre-submission claim scrubber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">ScrubCheck</span>
+      <span class="brand-tag">Pre-submission claim scrubber</span>
+    </div>
+    <div class="status" id="status" aria-live="polite">
+      <span class="status-chip" id="status-data">loading…</span>
+      <span class="status-chip" id="status-ai"></span>
+    </div>
+  </header>
+
+  <main class="workbench">
+    <!-- LEFT: the claim -->
+    <section class="panel panel-input" aria-label="Claim entry">
+      <h1 class="panel-title">Claim lines</h1>
+      <p class="panel-sub">One procedure per line. Attach modifiers with a hyphen. A trailing number is units.</p>
+
+      <textarea
+        id="claim"
+        class="claim-input"
+        spellcheck="false"
+        autocomplete="off"
+        placeholder="99214-25&#10;20610&#10;80053&#10;80048&#10;36415  3"></textarea>
+
+      <div class="input-row">
+        <button id="scrub-btn" class="btn btn-primary">Scrub claim</button>
+        <button id="clear-btn" class="btn btn-ghost">Clear</button>
+      </div>
+
+      <div class="samples">
+        <span class="samples-label">Load an example</span>
+        <div class="samples-chips" id="samples"></div>
+      </div>
+    </section>
+
+    <!-- RIGHT: the verdict -->
+    <section class="panel panel-output" aria-label="Results">
+      <div id="empty" class="empty">
+        <div class="empty-mark" aria-hidden="true"></div>
+        <p class="empty-head">Awaiting a claim</p>
+        <p class="empty-body">Enter claim lines to see which codes NCCI will bundle or cap.</p>
+      </div>
+
+      <div id="results" class="results" hidden>
+        <div id="verdict" class="verdict"></div>
+        <div class="block">
+          <h2 class="block-title">Claim</h2>
+          <div id="lineitems" class="lineitems"></div>
+        </div>
+        <div class="block" id="findings-block" hidden>
+          <div class="block-head">
+            <h2 class="block-title">Findings</h2>
+            <button id="explain-btn" class="btn btn-ai" hidden>Explain with Claude</button>
+          </div>
+          <div id="findings" class="findings"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footnote">
+    Educational tool build on public, sample CMS data. Not billing advice or a guarantee of payment. Verify against the current CMS NCCI edit files before submitting.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
