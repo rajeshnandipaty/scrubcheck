@@ -1,6 +1,6 @@
 # ScrubCheck
 
-**[Launch Live Demo](https://scrubcheck-135559900051.us-central1.run.app)**
+[Launch Live Demo](https://scrubcheck-135559900051.us-central1.run.app)
 
 > Paste a claim's procedure codes and see what Medicare's NCCI program will bundle or cap before submission. Reason for each flag are provided.
 
@@ -82,9 +82,9 @@ The importer reads CSV or tab-delimited text (if you only have the `.xlsx`, save
 - **The modifier indicator is the whole thing.** A `0` and a `1` look identical until you know that one is an absolute bundle and the other means "document the distinct service and append the modifier." Encoding that distinction, and checking whether the user already applied a bypass modifier, is what turns a code list into actionable feedback.
 - **Public reference data has quirks.** CMS encodes "still active" as `*`, ships dates in more than one format, and reorders columns between quarters. The importer maps by header name and fails open on unknown date formats rather than silently dropping edits.
 
-## Why this is not hosted publicly
+## Runs publicly on Google Cloud
 
-The core would be safe to host, since it is just lookups. But the honest reason to keep it local is the same as with the [glossary-flashcards](https://github.com/rajeshnandipaty/glossary-flashcards) project: the explanation layer invites paid API calls that can lead to abuse. So it runs locally, the source is here, and a demo video is on [my portfolio](https://rajeshnandipaty.com/projects/scrubcheck/).
+As with the [glossary-flashcards](https://github.com/rajeshnandipaty/glossary-flashcards) project: the source is here, a demo video is on [my portfolio](https://rajeshnandipaty.com/projects/scrubcheck/), and the [live demo is here](https://scrubcheck-135559900051.us-central1.run.app).
 
 ## Not billing advice
 
