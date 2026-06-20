@@ -1,5 +1,7 @@
 # ScrubCheck
 
+**[Launch Live Demo](https://scrubcheck-135559900051.us-central1.run.app)**
+
 > Paste a claim's procedure codes and see what Medicare's NCCI program will bundle or cap before submission. Reason for each flag are provided.
 
 <img width="1920" height="1200" alt="sc-deny" src="https://github.com/user-attachments/assets/9324d215-b325-4f93-92f8-2c40939341a0" />
