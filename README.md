@@ -1,8 +1,8 @@
 # ScrubCheck
 
-[Launch Live Demo](https://scrubcheck-135559900051.us-central1.run.app)
+**[Launch Live Demo](https://scrubcheck-135559900051.us-central1.run.app)**
 
-> Paste a claim's procedure codes and see what Medicare's NCCI program will bundle or cap before submission. Reason for each flag are provided.
+> Paste a claim's procedure codes and see what Medicare's NCCI program will bundle or cap before submission. The reason for each flag is provided.
 
 <img width="1920" height="1200" alt="sc-deny" src="https://github.com/user-attachments/assets/9324d215-b325-4f93-92f8-2c40939341a0" />
 
@@ -27,7 +27,7 @@ Type one procedure per line, attach modifiers with a hyphen, and put units after
 ScrubCheck answers instantly and offline:
 
 - **Hard bundles.** Billing both a comprehensive metabolic panel (`80053`) and a basic metabolic panel (`80048`) should not be possible, since the comprehensive already includes the basic. Modifier indicator `0` means no modifier overrides it.
-- **Modifier-eligible bundles.** A minor procedure (`20610`) bundles the office visit billed with it, unless the visit was separately identifiable and carries modifier `25`. Modifier indicator `1` means a modifier can apply, so ScrubCheck checks whether an appropriate one is already used and tells if it is missing.
+- **Modifier-eligible bundles.** A minor procedure (`20610`) bundles the office visit billed with it, unless the visit was separately identifiable and carries modifier `25`. Modifier indicator `1` means a modifier can apply, so ScrubCheck checks whether an appropriate one is already used and flags it when missing.
 - **Unit-cap overages.** Billing `36415` (venipuncture) three times against an MUE of two. It distinguishes an absolute policy cap (MAI 2, not appealable) from a clinical cap (MAI 3, payable on appeal with documentation).
 - **Codes it does not recognize.** These are flagged explicitly, so "no findings" is never mistaken for "fully validated."
 
